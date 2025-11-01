@@ -1,0 +1,11 @@
+.idea/
+.env
+venv/
+links.txt
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
+*.pywz
