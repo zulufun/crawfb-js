@@ -13,23 +13,6 @@ function addLog(message, data = {}) {
     console.log(`[LOG] ${message}`, data);
 }
 
-// Hàm tải xuống tất cả logs một lần
-function downloadAllLogs() {
-    const logContent = logBuffer.map(entry => 
-        `[${entry.timestamp}] ${entry.message}\n${JSON.stringify(entry.data, null, 2)}\n${'='.repeat(80)}\n`
-    ).join('\n');
-    
-    const blob = new Blob([logContent], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `facebook_scraper_complete_log_${Date.now()}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
-
 /**
  * Hàm lấy tên người đăng bài từ element link
  */
@@ -244,13 +227,15 @@ async function main() {
 
     console.log(total_links);
     
-    // Tải xuống logs
     addLog(`Scraping completed`, { 
         total_links: Object.keys(total_links).length
     });
-    downloadAllLogs();
     
-    return total_links;
+    // Trả về cả links và logs để Python xử lý
+    return {
+        links: total_links,
+        logs: logBuffer
+    };
 }
 
 return await main()

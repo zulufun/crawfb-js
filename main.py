@@ -11,18 +11,58 @@ from datetime import datetime
 from googletrans import Translator
 import requests
 from typing import Optional
-logging.basicConfig(level=logging.INFO)
+
+#Logging debug JS
+import json
+import os
+
+# Tạo thư mục logs nếu chưa có
+LOG_DIR = "logs"
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+# logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(os.path.join(LOG_DIR, f'main_{datetime.now().strftime("%Y%m%d")}.log'), encoding='utf-8'),
+        logging.StreamHandler()
+    ]
+)
+
 logger = logging.getLogger(__name__)
 with open("crawl-data.js", "r", encoding="utf-8") as file:
     JAVASCRIPT_SCRIPT = file.read()
-
 
 class User:
     def __init__(self, id: str, link: str, name: str = ""):
         self.id = id
         self.link = link
         self.name = name if name else id
-
+def save_js_logs_to_file(logs, user_id):
+    """Lưu logs từ JavaScript vào file"""
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_filename = os.path.join(LOG_DIR, f"js_crawl_{user_id}_{timestamp}.log")
+    
+    try:
+        with open(log_filename, 'w', encoding='utf-8') as f:
+            f.write(f"{'='*80}\n")
+            f.write(f"JavaScript Crawl Logs - User: {user_id}\n")
+            f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"{'='*80}\n\n")
+            
+            for log_entry in logs:
+                f.write(f"[{log_entry['timestamp']}] {log_entry['message']}\n")
+                if log_entry.get('data'):
+                    f.write(json.dumps(log_entry['data'], indent=2, ensure_ascii=False))
+                    f.write("\n")
+                f.write(f"{'-'*80}\n")
+        
+        logger.info(f"Saved JavaScript logs to {log_filename}")
+        return log_filename
+    except Exception as e:
+        logger.error(f"Error saving JavaScript logs: {e}")
+        return None
 
 def get_input_links(file_path: str) -> list[str]:
     with open(file_path, "r") as file:
@@ -188,36 +228,89 @@ def send_to_telegram(post_id, link, user_id, name, content, timestamp):
     except Exception as e:
         logger.error(f"Lỗi khi gửi bài đăng {post_id}: {str(e)}")
         return False
+# def parse_user_profile(browser: webdriver.Chrome, user: User):
+#     user_data = db.get_user(user.id)
+#     if not user_data:
+#         logger.error("User %s not found in db", user.name)
+#         return
+#     renamed = False
+#     logger.info("Parsing user profile %s", user.id)
+#     links = browser.execute_script(JAVASCRIPT_SCRIPT)
+#     for id, data in links.items():
+#         if not db.get_post(id):
+#             link = data["link"]
+#             name = data["name"]
+#             content = data["content"]
+#             # Cant get the time from the page
+#             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#             logger.info("Adding post %s\t%s\t%s\t%s", id, name, content, timestamp)
+#             db.add_post(
+#                 id=id,
+#                 link=link,
+#                 user_id=user.id,
+#                 name=name,
+#                 content=content,
+#                 timestamp=timestamp,
+#             )
+#             send_to_telegram(id, link, user.id, name, content, timestamp)
+#         if 'name' in locals() and not user_data[2] and name and not renamed:
+#             db.update_user_name(user.id, name=name)
+#             logger.info("Renamed user %s to %s", user.id, name)
+#             renamed = True
 def parse_user_profile(browser: webdriver.Chrome, user: User):
     user_data = db.get_user(user.id)
     if not user_data:
-        logger.error("User %s not found in db", user.name)
+        logger.error("User %s not found in db", user.id)
         return
+    
     renamed = False
     logger.info("Parsing user profile %s", user.id)
-    links = browser.execute_script(JAVASCRIPT_SCRIPT)
-    for id, data in links.items():
-        if not db.get_post(id):
-            link = data["link"]
-            name = data["name"]
-            content = data["content"]
-            # Cant get the time from the page
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            logger.info("Adding post %s\t%s\t%s\t%s", id, name, content, timestamp)
-            db.add_post(
-                id=id,
-                link=link,
-                user_id=user.id,
-                name=name,
-                content=content,
-                timestamp=timestamp,
-            )
-            send_to_telegram(id, link, user.id, name, content, timestamp)
-        if 'name' in locals() and not user_data[2] and name and not renamed:
-            db.update_user_name(user.id, name=name)
-            logger.info("Renamed user %s to %s", user.id, name)
-            renamed = True
-
+    
+    try:
+        # Execute JavaScript và nhận kết quả
+        result = browser.execute_script(JAVASCRIPT_SCRIPT)
+        
+        # Kiểm tra xem result có phải là dict với keys 'links' và 'logs' không
+        if isinstance(result, dict) and 'links' in result and 'logs' in result:
+            links = result['links']
+            logs = result['logs']
+            
+            # Lưu logs vào file
+            save_js_logs_to_file(logs, user.id)
+            logger.info(f"Received {len(logs)} log entries from JavaScript for user {user.id}")
+        else:
+            # Backward compatibility: nếu chỉ trả về links
+            links = result
+            logger.warning("No logs received from JavaScript (old format)")
+        
+        # Xử lý links như cũ
+        for id, data in links.items():
+            if not db.get_post(id):
+                link = data["link"]
+                name = data["name"]
+                content = data["content"]
+                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                
+                logger.info("Adding post %s\t%s\t%s\t%s", id, name, content[:50] if content else "", timestamp)
+                
+                db.add_post(
+                    id=id,
+                    link=link,
+                    user_id=user.id,
+                    name=name,
+                    content=content,
+                    timestamp=timestamp,
+                )
+                send_to_telegram(id, link, user.id, name, content, timestamp)
+            
+            if 'name' in locals() and not user_data[2] and name and not renamed:
+                db.update_user_name(user.id, name=name)
+                logger.info("Renamed user %s to %s", user.id, name)
+                renamed = True
+                
+    except Exception as e:
+        logger.error(f"Error parsing user profile {user.id}: {e}")
+        
 def process_link_segment(browser: webdriver.Chrome, user_list: list[User]):
     logger.info("Processing link segment for %d users", len(user_list))
     for idx, user in enumerate(user_list):
@@ -240,6 +333,7 @@ def get_user_list_from_db() -> list[User]:
 
 def main():
     logger.info("Starting main")
+    logger.info(f"Log files will be saved to: {os.path.abspath(LOG_DIR)}")
     db.init_db()
 
     browser = prepare_browser()

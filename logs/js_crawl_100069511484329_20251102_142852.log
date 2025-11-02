@@ -1,0 +1,225 @@
+================================================================================
+JavaScript Crawl Logs - User: 100069511484329
+Generated: 2025-11-02 14:28:52
+================================================================================
+
+[2025-11-02T07:28:47.124Z] Starting iteration 1/5
+{
+  "scroll_position": 1000
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:47.160Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz x1heor9g xkrqix3 x1sur9pj x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=%2CO%2CP-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a aria-label=\"1d\" attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoe",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:47.162Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xi81zsa x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&comment_id=1833754417226727&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=R-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoeWTmRYzbifac5Cbs8",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:47.188Z] Iteration 1 completed
+{
+  "links_found": 1,
+  "total_links_so_far": 1
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:48.192Z] Starting iteration 2/5
+{
+  "scroll_position": 1500
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:48.212Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz x1heor9g xkrqix3 x1sur9pj x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=%2CO%2CP-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a aria-label=\"1d\" attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoe",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:48.213Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xi81zsa x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&comment_id=1833754417226727&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=R-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoeWTmRYzbifac5Cbs8",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:48.238Z] Iteration 2 completed
+{
+  "links_found": 1,
+  "total_links_so_far": 1
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:49.254Z] Starting iteration 3/5
+{
+  "scroll_position": 2000
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:49.268Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz x1heor9g xkrqix3 x1sur9pj x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=%2CO%2CP-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a aria-label=\"1d\" attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoe",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:49.269Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xi81zsa x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&comment_id=1833754417226727&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=R-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoeWTmRYzbifac5Cbs8",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:49.299Z] Iteration 3 completed
+{
+  "links_found": 1,
+  "total_links_so_far": 1
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:50.314Z] Starting iteration 4/5
+{
+  "scroll_position": 2500
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:50.336Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz x1heor9g xkrqix3 x1sur9pj x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=%2CO%2CP-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a aria-label=\"1d\" attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoe",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:50.338Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xi81zsa x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&comment_id=1833754417226727&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=R-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoeWTmRYzbifac5Cbs8",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:50.367Z] Iteration 4 completed
+{
+  "links_found": 1,
+  "total_links_so_far": 1
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:51.377Z] Starting iteration 5/5
+{
+  "scroll_position": 3000
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:51.398Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz x1heor9g xkrqix3 x1sur9pj x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=%2CO%2CP-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a aria-label=\"1d\" attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoe",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:51.399Z] Name extracted: Hun Manet
+{
+  "a_el_info": {
+    "className": "x1i10hfl xjbqb8w x1ejq31n x18oe1m7 x1sy0etr xstzfhl x972fbf x10w94by x1qhh985 x14e42zd x9f619 x1ypdohk xt0psk2 x3ct3a4 xdj266r x14z9mp xat24cr x1lziwak xexx8yu xyri2b x18d9i69 x1c1uobl x16tdsg8 x1hl2dhg xggy1nq x1a2a7pz xkrqix3 x1sur9pj xi81zsa x1s688f",
+    "href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329&comment_id=1833754417226727&__cft__[0]=AZVHq-bfJXCZPJW3KJuT2upWpHqLL4YxDYgvbY2xUP937JdjSPL3tQq4IIz5XEKJKq2Lay5HJETM3gnnw_e2e7_NGs4FYsINy-aQ2kYX_DwoA4cweI_qszm4HYK36ASiwCj5Jjf-qekauE71kYGzJbC9tcDoMHCHpTrLBOxh92PefFdrcduDPSUqdY6mxil0dc8&__tn__=R-R",
+    "id": "",
+    "innerText": "1d",
+    "outerHTML": "<a attributionsrc=\"/privacy_sandbox/comet/register/source/?xt=AZWsopf4dW2-yddfN3VoaNue9Q-vQuUr-nTjnC5vgl8BHYkTy5pU0_w4hu629bWnsWsm7H56LdiCPyOsJPHpKPlPpUH64-iRwd-DK5gFGnMF6kPw3v782wzhoeWTmRYzbifac5Cbs8",
+    "tagName": "A"
+  },
+  "link_href": "https://web.facebook.com/permalink.php?story_fbid=pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl&id=100069511484329",
+  "link_id": "pfbid029n2jyxvHxiS6LrignTNAxNuKbrzQN1ZAWRU8ZWksPQmo2zNu6aoFh7j5zhbZQbdVl",
+  "link_type": "posts_old",
+  "name": "Hun Manet"
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:51.424Z] Iteration 5 completed
+{
+  "links_found": 1,
+  "total_links_so_far": 1
+}
+--------------------------------------------------------------------------------
+[2025-11-02T07:28:52.437Z] Scraping completed
+{
+  "total_links": 1
+}
+--------------------------------------------------------------------------------
