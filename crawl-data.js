@@ -1,19 +1,3 @@
-// Hàm lưu log vào file
-function saveLog(logData) {
-    const timestamp = new Date().toISOString();
-    const logEntry = `[${timestamp}] ${JSON.stringify(logData, null, 2)}\n`;
-    
-    // Tạo blob và tải xuống
-    const blob = new Blob([logEntry], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `facebook_scraper_log_${Date.now()}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-}
 // Biến lưu trữ tất cả logs
 let logBuffer = [];
 
@@ -46,6 +30,66 @@ function downloadAllLogs() {
     URL.revokeObjectURL(url);
 }
 
+/**
+ * Hàm lấy tên người đăng bài từ element link
+ */
+function getPostAuthorName(a_el) {
+    try {
+        // Phương pháp 1: Tìm strong tag gần nhất
+        let currentElement = a_el;
+        let maxDepth = 15;
+        
+        for (let i = 0; i < maxDepth; i++) {
+            if (!currentElement.parentNode) break;
+            currentElement = currentElement.parentNode;
+            
+            let strongTag = currentElement.querySelector('strong');
+            if (strongTag && strongTag.innerText && strongTag.innerText.trim()) {
+                let name = strongTag.innerText.trim();
+                if (name.length > 0 && name.length < 100) {
+                    return name;
+                }
+            }
+        }
+        
+        currentElement = a_el;
+        for (let i = 0; i < maxDepth; i++) {
+            if (!currentElement.parentNode) break;
+            currentElement = currentElement.parentNode;
+            
+            let profileLink = currentElement.querySelector('a[aria-label*="profile"]');
+            if (profileLink) {
+                let ariaLabel = profileLink.getAttribute('aria-label');
+                if (ariaLabel) {
+                    let nameMatch = ariaLabel.match(/^(.+?)(?:'s profile| profile)/i);
+                    if (nameMatch && nameMatch[1]) {
+                        return nameMatch[1].trim();
+                    }
+                }
+            }
+        }
+        
+        currentElement = a_el;
+        for (let i = 0; i < maxDepth; i++) {
+            if (!currentElement.parentNode) break;
+            currentElement = currentElement.parentNode;
+            
+            let headingTags = currentElement.querySelectorAll('h2, h3, h4');
+            for (let heading of headingTags) {
+                let name = heading.innerText.trim();
+                if (name.length > 0 && name.length < 100) {
+                    return name;
+                }
+            }
+        }
+        
+    } catch (e) {
+        console.error("Error in getPostAuthorName:", e);
+    }
+    
+    return "";
+}
+
 async function get_posts() {
     resolve_all_links();
     click_more();
@@ -53,8 +97,7 @@ async function get_posts() {
     let a_el_arr = Array.from(document.querySelectorAll('a')).filter(link => {
         let href = link.getAttribute('href');
         return href && (href.match(/\/(?:reel|posts|videos)\/[A-Za-z0-9:]+/) || href.match(/\/permalink\.php\?story_fbid=[A-Za-z0-9:]+&id=\d+/));
-    }
-    );
+    });
 
     let links_dict = {}
 
@@ -98,13 +141,16 @@ async function get_posts() {
 
                     if (link_href in links_dict)
                         continue;
+                        
                     let name = ""
                     let content = ""
                     let time = ""
+                    
                     try {
-                        // name = a_el.parentNode.parentNode... 
-                        name = a_el.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[0].querySelector("strong").innerText
-                        // name = getPostAuthorName(a_el);
+                        // SỬ DỤNG HÀM MỚI ĐỂ LẤY TÊN
+                        name = getPostAuthorName(a_el);
+                        
+                        // GHI LOG CHI TIẾT
                         addLog(`Name extracted: ${name}`, {
                             name: name,
                             link_id: link_id,
@@ -116,29 +162,39 @@ async function get_posts() {
                                 className: a_el.className,
                                 id: a_el.id,
                                 tagName: a_el.tagName,
-                                outerHTML: a_el.outerHTML.substring(0, 200) // Lấy 200 ký tự đầu
+                                outerHTML: a_el.outerHTML.substring(0, 200)
                             }
                         });
+                        
                     } catch (e) {
+                        addLog(`Failed to extract name`, {
+                            error: e.message,
+                            link_id: link_id,
+                            link_href: link_href,
+                            a_el_info: {
+                                href: a_el.href,
+                                innerText: a_el.innerText
+                            }
+                        });
                         console.log(e);
                     }
+                    
                     try {
                         content = a_el.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[2].innerText
-                        // console.log(content)
                     } catch (e) {
                     }
+                    
                     try {
                         time = a_el.innerText
-                        // console.log(time)
                     } catch (e) {
                     }
+                    
                     links_dict[link_id] = { link: link_href, content: content, name: name, time: time }
                 } catch (e) {
                     // console.log(a_el)
                 }
                 break
         }
-
     }
     return links_dict;
 }
@@ -155,16 +211,13 @@ function resolve_all_links() {
     document.querySelectorAll('a').forEach(el => {
         el.dispatchEvent(eventFocusIn)
         el.dispatchEvent(eventFocusOut)
-    }
-    )
-
+    });
 }
 
 function click_more() {
     Array.from(document.querySelectorAll('div[role="button"][tabindex="0"].x1s688f'))
         .filter(div => div.textContent.trim() === atob("WGVtIHRo6m0="))
         .forEach(div => {
-            // console.log(div)
             div.click();
         });
 }
@@ -173,14 +226,30 @@ async function main() {
     let total_links = {};
     let anchor = 1000;
     window.scrollTo(0, anchor);
+    
     for (let i = 0; i < 5; i++) {
+        addLog(`Starting iteration ${i + 1}/5`, { scroll_position: anchor + 500 * i });
+        
         let links = await get_posts();
         total_links = { ...total_links, ...links };
+        
+        addLog(`Iteration ${i + 1} completed`, { 
+            links_found: Object.keys(links).length,
+            total_links_so_far: Object.keys(total_links).length 
+        });
+        
         window.scrollTo(0, anchor + 500 * i);
         await new Promise(r => setTimeout(r, 1000));
     }
 
     console.log(total_links);
+    
+    // Tải xuống logs
+    addLog(`Scraping completed`, { 
+        total_links: Object.keys(total_links).length
+    });
+    downloadAllLogs();
+    
     return total_links;
 }
 

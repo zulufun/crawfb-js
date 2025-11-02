@@ -11,9 +11,13 @@ from datetime import datetime
 from googletrans import Translator
 import requests
 from typing import Optional
+import pickle
+import os
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-with open("crawl-data.js", "r", encoding="utf-8") as file:
+
+with open("crawl-link.js", "r", encoding="utf-8") as file:
     JAVASCRIPT_SCRIPT = file.read()
 
 
@@ -82,28 +86,94 @@ def open_browser() -> webdriver.Chrome:
     chrome_options.add_argument("--safebrowsing-disable-auto-update")
     chrome_options.add_argument("--enable-unsafe-swiftshader")
     chrome_options.add_argument("--js-flags=--noexpose_wasm,--jitless")
-    #Add
-#     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
-#     chrome_options.add_experimental_option('useAutomationExtension', False)
-#     chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-#     browser.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-#     "source": "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
-# })
+
     browser = webdriver.Chrome(options=chrome_options)
 
     logger.info("Browser opened")
     return browser
 
 
-def prepare_browser() -> webdriver.Chrome:
+def save_cookies(browser: webdriver.Chrome, filepath: str = "cookies.pkl"):
+    """Lưu cookies vào file"""
+    cookies = browser.get_cookies()
+    with open(filepath, 'wb') as file:
+        pickle.dump(cookies, file)
+    logger.info("Cookies saved to %s", filepath)
+
+
+def load_cookies(browser: webdriver.Chrome, filepath: str = "cookies.pkl"):
+    """Load cookies từ file"""
+    if os.path.exists(filepath):
+        with open(filepath, 'rb') as file:
+            cookies = pickle.load(file)
+        
+        # Phải vào facebook.com trước khi add cookies
+        browser.get("https://www.facebook.com")
+        time.sleep(2)
+        
+        for cookie in cookies:
+            # Bỏ qua các field không cần thiết
+            if 'expiry' in cookie:
+                cookie['expiry'] = int(cookie['expiry'])
+            browser.add_cookie(cookie)
+        
+        logger.info("Cookies loaded from %s", filepath)
+        return True
+    return False
+
+
+def prepare_browser(use_saved_session: bool = True) -> webdriver.Chrome:
+    """
+    Chuẩn bị browser với option sử dụng session đã lưu
+    
+    Args:
+        use_saved_session: Nếu True, sẽ thử load cookies đã lưu
+    """
     logger.info("Preparing browser")
     browser = open_browser()
-    for _ in range(BROWSER_MAX_TAB_NUMBER):
+    
+    # Nếu có cookies đã lưu và muốn dùng, load cookies
+    if use_saved_session and load_cookies(browser):
+        browser.get("https://www.facebook.com")
+        time.sleep(3)
+        
+        # Kiểm tra xem đã login chưa
+        if is_logged_in(browser):
+            logger.info("Successfully logged in using saved session")
+        else:
+            logger.warning("Saved session expired, need to login again")
+            login_facebook(browser)
+    else:
+        # Không có cookies hoặc không muốn dùng, login bình thường
+        login_facebook(browser)
+    
+    # Mở thêm các tab
+    for _ in range(BROWSER_MAX_TAB_NUMBER - 1):  # -1 vì đã có 1 tab rồi
         browser.execute_script("window.open('about:blank', '_blank');")
 
-    logger.info("Opened %d tabs", BROWSER_MAX_TAB_NUMBER)
+    logger.info("Opened %d tabs total", BROWSER_MAX_TAB_NUMBER)
     logger.info("Browser prepared")
     return browser
+
+
+def is_logged_in(browser: webdriver.Chrome) -> bool:
+    """Kiểm tra xem đã đăng nhập Facebook chưa"""
+    try:
+        # Kiểm tra xem có element đặc trưng của trang đã login không
+        # Ví dụ: icon profile, menu, etc.
+        browser.get("https://www.facebook.com")
+        time.sleep(2)
+        
+        # Kiểm tra xem có form login không, nếu có = chưa login
+        try:
+            browser.find_element(By.ID, "email")
+            return False
+        except:
+            # Không tìm thấy form login = đã login
+            return True
+    except Exception as e:
+        logger.error("Error checking login status: %s", e)
+        return False
 
 
 def login_facebook(browser: webdriver.Chrome):
@@ -113,15 +183,21 @@ def login_facebook(browser: webdriver.Chrome):
         wait = WebDriverWait(browser, 1000)
         wait.until(EC.presence_of_element_located((By.ID, "email")))
 
-        browser.find_element(By.ID, "email").send_keys(FACEBOOK_EMAIL)
+        # browser.find_element(By.ID, "email").send_keys(FACEBOOK_EMAIL)
         browser.find_element(By.ID, "pass").send_keys(FACEBOOK_PASSWORD)
         browser.find_element(By.ID, "loginbutton").click()
 
         wait.until(EC.title_is(f"Facebook"))
         time.sleep(4)
+        
+        # Lưu cookies sau khi đăng nhập thành công
+        save_cookies(browser)
+        
         logger.info("Logged in to Facebook")
-        # browser.close()
-        # browser.get("https://facebook.com")
+        
+        # QUAN TRỌNG: KHÔNG đóng tab login, chỉ chuyển về trang chủ
+        browser.get("https://www.facebook.com")
+        
     except Exception as e:
         logger.error("Error logging in to Facebook: %s", e)
         raise e
@@ -138,20 +214,18 @@ TELEGRAM_BOT_TOKEN = "7969047209:AAGxoF-JI71g6rtwS4mTaEeXRSSeDflXmB4"
 TELEGRAM_CHAT_ID = "7944860105"  
 
 
-
 def translate_to_vietnamese(text):
-        try:
-            translator = Translator()
-            # Dịch văn bản sang tiếng Việt
-            translated = translator.translate(text, dest='vi')
-            return translated.text
-        except Exception as e:
-            return f"Lỗi khi dịch: {str(e)}"
-        
+    try:
+        translator = Translator()
+        translated = translator.translate(text, dest='vi')
+        return translated.text
+    except Exception as e:
+        return f"Lỗi khi dịch: {str(e)}"
+
+
 def send_to_telegram(post_id, link, user_id, name, content, timestamp):
     """Gửi bài đăng đến Telegram với định dạng đẹp (MarkdownV2)"""
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    
     
     name = name or "Không xác định"
     content = content or "Không có nội dung"
@@ -160,12 +234,10 @@ def send_to_telegram(post_id, link, user_id, name, content, timestamp):
     if len(content.split()) > 50:
         content_short += "..."
 
-    
     def escape_markdown(text):
         escape_chars = r'_*[]()~`>#+-=|{}.!'
         return re.sub(f'([{re.escape(escape_chars)}])', r'\\\1', text)
 
-    
     message = (
         f"👤 *Người đăng:* {escape_markdown(name)}\n"
         f"📝 *Nội dung:*\n`{translate_to_vietnamese(escape_markdown(content_short))}`\n"
@@ -175,8 +247,8 @@ def send_to_telegram(post_id, link, user_id, name, content, timestamp):
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": message,
-        "parse_mode": "MarkdownV2",  # Sử dụng MarkdownV2 để có nhiều tùy chọn định dạng
-        "disable_web_page_preview": False  # Tắt xem trước link để tin nhắn gọn hơn
+        "parse_mode": "MarkdownV2",
+        "disable_web_page_preview": False
     }
 
     try:
@@ -188,6 +260,8 @@ def send_to_telegram(post_id, link, user_id, name, content, timestamp):
     except Exception as e:
         logger.error(f"Lỗi khi gửi bài đăng {post_id}: {str(e)}")
         return False
+
+
 def parse_user_profile(browser: webdriver.Chrome, user: User):
     user_data = db.get_user(user.id)
     if not user_data:
@@ -201,7 +275,6 @@ def parse_user_profile(browser: webdriver.Chrome, user: User):
             link = data["link"]
             name = data["name"]
             content = data["content"]
-            # Cant get the time from the page
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             logger.info("Adding post %s\t%s\t%s\t%s", id, name, content, timestamp)
             db.add_post(
@@ -218,19 +291,56 @@ def parse_user_profile(browser: webdriver.Chrome, user: User):
             logger.info("Renamed user %s to %s", user.id, name)
             renamed = True
 
+
+def apply_cookies_to_tab(browser: webdriver.Chrome, tab_index: int):
+    """
+    Áp dụng cookies từ tab đầu tiên (tab login) sang tab khác
+    
+    Args:
+        browser: Chrome webdriver instance
+        tab_index: Index của tab cần apply cookies
+    """
+    # Lưu cookies từ tab đầu tiên
+    browser.switch_to.window(browser.window_handles[0])
+    cookies = browser.get_cookies()
+    
+    # Chuyển sang tab mới và apply cookies
+    browser.switch_to.window(browser.window_handles[tab_index])
+    browser.get("https://www.facebook.com")
+    time.sleep(1)
+    
+    for cookie in cookies:
+        try:
+            browser.add_cookie(cookie)
+        except Exception as e:
+            logger.debug("Could not add cookie: %s", e)
+    
+    logger.debug("Applied cookies to tab %d", tab_index)
+
+
 def process_link_segment(browser: webdriver.Chrome, user_list: list[User]):
     logger.info("Processing link segment for %d users", len(user_list))
+    
+    # Bước 1: Mở tất cả các user link trong các tab
     for idx, user in enumerate(user_list):
         browser.switch_to.window(browser.window_handles[idx])
-        #add
-        # login_facebook(browser)
-        #
+        
+        # Apply cookies vào tab này (từ tab 0 - tab đăng nhập)
+        if idx > 0:  # Tab 0 đã có cookies rồi
+            apply_cookies_to_tab(browser, idx)
+        
+        # Load trang user
         browser.get(user.link)
+        logger.info("Loaded %s in tab %d", user.link, idx)
 
+    # Đợi tất cả trang load
+    time.sleep(5)
+
+    # Bước 2: Parse từng trang
     for idx, user in enumerate(user_list):
         browser.switch_to.window(browser.window_handles[idx])
         parse_user_profile(browser, user)
-        time.sleep(10)
+        time.sleep(2)
 
 
 def get_user_list_from_db() -> list[User]:
@@ -241,14 +351,11 @@ def get_user_list_from_db() -> list[User]:
 def main():
     logger.info("Starting main")
     db.init_db()
-
-    browser = prepare_browser()
+    
+    # Prepare browser với option sử dụng saved session
+    browser = prepare_browser(use_saved_session=True)
     login_facebook(browser)
-    #giải capcha bằng tay
-    # time.sleep(120)
-    # browser.get("https://facebook.com")
-    # time.sleep(3)
-
+    browser.get("https://www.facebook.com")
     while True:
         process_link()
         user_list = get_user_list_from_db()
@@ -256,8 +363,10 @@ def main():
         print("user list", user_list_chunk)
         start_time = time.time()
         next_time = start_time + INTERVAL_MINUTE * 60
+        
         for user_list in user_list_chunk:
             process_link_segment(browser, user_list)
+        
         sleep_time = next_time - time.time()
         if sleep_time > 0:
             logger.info("Sleeping for %d seconds", sleep_time)
